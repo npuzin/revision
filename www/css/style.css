@@ -15,6 +15,17 @@
   color: white;
   font-size: 17px;
 }
+ion-view {
+
+background: #0050d1; /* Old browsers */
+background: -moz-linear-gradient(top, #0050d1 0%, #385789 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0050d1), color-stop(100%,#385789)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #0050d1 0%,#385789 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #0050d1 0%,#385789 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #0050d1 0%,#385789 100%); /* IE10+ */
+background: linear-gradient(to bottom, #0050d1 0%,#385789 100%); /* W3C */
+
+}
 ion-view#fiche.red { background-color: #FFE6E6;}
 ion-view#fiche.yellow { background-color: #FEFFE6;}
 ion-view#fiche.green { background-color: #E6FFE8;}
@@ -22,4 +33,18 @@ ion-view#fiche.blue { background-color: #E6ECFF;}
 ion-view#fiche.readonly #subheader {display: none}
 ion-view#fiche.readonly .has-subheader { top:44px;}
 ion-view#fiche #subheader { padding: 0; padding-top:1px; border:none; background-color: transparent; }
+
+.list a {
+
+font-size: 20px;
+font-family: calibri;
+background-color: #eee;
+margin: 10px 20px;
+border-radius: 8px;
+padding: 20px 20px;
+/*border: 2px solid #ddd;*/
+-webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+-moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+}
 
