@@ -6,7 +6,7 @@
     </div>
   </ion-header-bar>
   <ion-content>
-      <form ng-submit="saveMatiere()">
+      <form>
       <div class="list">
 
         <label class="item item-input" style="padding-top:40px">
@@ -20,12 +20,10 @@
           </select>
         </label>
 
-<label class="item">
         <div style="text-align: center;padding-top:10px">
-          <button class="button  button-positive" type="submit" >{{matiereDialogData.isNew ? 'Ajouter' : 'Enregistrer'}}</button>
+          <button class="button  button-positive" type="submit" ng-click="saveMatiere()">{{matiereDialogData.isNew ? 'Ajouter' : 'Enregistrer'}}</button>
           <button ng-show="!matiereDialogData.isNew"  class="button  button-positive" ng-click="deleteMatiere()">Effacer</button>
         </div>
-        </label>
       </div>
       </form>
   </ion-content>
