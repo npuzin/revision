@@ -39,6 +39,7 @@
   </feature>
 
   <gap:splash gap:platform="ios" height="960" src="img/splash.png" width="640" />
+  <gap:splash gap:platform="ios" height="640" src="img/splash-landscape.png" width="960" />
 
   <icon src="img/icon.png" />
 
