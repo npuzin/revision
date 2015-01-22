@@ -1,0 +1,21 @@
+<ion-view view-title="Classeur">
+
+  <ion-nav-buttons side="right">
+    <button class="button icon-right ion-plus button-main"
+      ng-click="openMatiereDialog($event)"></button>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+  <div class="list">
+
+     <a class="item item-icon-right" href="#/matiere/{{matiere.id}}" ng-repeat="matiere in matieres">
+      {{matiere.name}}
+      <button class="button icon ion-more button-main" ng-click="openMatiereDialog($event,matiere)"></button>
+    </a>
+
+
+  </div>
+
+	</ion-content>
+</ion-view>

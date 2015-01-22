@@ -1,0 +1,25 @@
+.cke_chrome {
+  border: none!important;
+  box-shadow: none!important;
+}
+
+.button-main {
+  border:none!important;
+  font-size: 17px!important;
+  background-color: inherit!important;
+}
+.popup-head {
+  background-color: #387ef5;
+}
+.popup-title {
+  color: white;
+  font-size: 17px;
+}
+ion-view#fiche.red { background-color: #FFE6E6;}
+ion-view#fiche.yellow { background-color: #FEFFE6;}
+ion-view#fiche.green { background-color: #E6FFE8;}
+ion-view#fiche.blue { background-color: #E6ECFF;}
+ion-view#fiche.readonly #subheader {display: none}
+ion-view#fiche.readonly .has-subheader { top:44px;}
+ion-view#fiche #subheader { padding: 0; padding-top:1px; border:none; background-color: transparent; }
+

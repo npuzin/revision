@@ -1,0 +1,30 @@
+<ion-modal-view >
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">{{matiereDialogData.isNew ? 'Nouvelle matière' : 'Modifier matière'}}</h1>
+    <div class="buttons">
+      <button class="button icon-right ion-close button-main" ng-click="closeMatiereDialog()"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+      <form>
+      <div class="list">
+
+        <label class="item item-input" style="padding-top:40px">
+          <span class="input-label">Nom :</span>
+          <input type="text" ng-model="matiereDialogData.matiere.name">
+        </label>
+
+        <label class="item item-input item-select">
+          <span class="input-label">Couleur de fiche :</span>
+          <select ng-options="color.name as color.label for color in matiereDialogData.colors" ng-model="matiereDialogData.matiere.color">
+          </select>
+        </label>
+
+        <div style="text-align: center;padding-top:10px">
+          <button class="button  button-positive" type="submit" ng-click="saveMatiere()">{{matiereDialogData.isNew ? 'Ajouter' : 'Enregistrer'}}</button>
+          <button ng-show="!matiereDialogData.isNew"  class="button  button-positive" ng-click="deleteMatiere()">Effacer</button>
+        </div>
+      </div>
+      </form>
+  </ion-content>
+</ion-modal-view>

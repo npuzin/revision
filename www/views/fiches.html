@@ -1,0 +1,27 @@
+<ion-view view-title="{{matiere.name}}" >
+
+  <ion-nav-buttons side="left">
+    <button nav-direction="back" class="button  button-main icon ion-ios7-arrow-back"
+      ng-click="back()">&nbsp;Classeur</button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+    <button class="button icon-right ion-plus button-main"
+      ng-click="openFicheDialog($event)"></button>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+  <div class="list">
+
+     <a class="item item-icon-right" href="#/matiere/{{matiere.id}}/fiche/{{fiche.id}}" ng-repeat="fiche in fiches">
+      {{fiche.name}}
+      <button class="button icon ion-more button-main" ng-click="openFicheDialog($event,fiche)"></button>
+    </a>
+
+
+  </div>
+
+
+	</ion-content>
+</ion-view>
