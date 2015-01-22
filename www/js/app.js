@@ -17,7 +17,7 @@ angular.module('revision', ['ionic','angularUUID2'])
 .config(function($stateProvider, $urlRouterProvider) {
 
   window.onerror = function(errorMsg, url, lineNumber) {
-    alert(errorMsg + '\n\nFile ' + url + ' line ' +lineNumber);
+    //alert(errorMsg + '\n\nFile ' + url + ' line ' +lineNumber);
   }
 
   $urlRouterProvider.otherwise('/');
