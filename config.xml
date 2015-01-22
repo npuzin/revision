@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.revision469259" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.ionicframework.revision469259" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
   <name>Nico</name>
 
     <description>
-        This is my description
+        This is my description nico 2
     </description>
   <author email="nicolas.puzin@gmail.com" href="http://ionicframework.com/">
       Nico
