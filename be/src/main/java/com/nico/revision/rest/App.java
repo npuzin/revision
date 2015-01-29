@@ -1,4 +1,4 @@
-package com.nico.nputest2015.rest;
+package com.nico.revision.rest;
 
 import java.util.HashSet;
 import java.util.Set;

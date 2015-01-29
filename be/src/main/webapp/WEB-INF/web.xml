@@ -10,7 +10,7 @@
 	
 	<context-param>
 		<param-name>javax.ws.rs.core.Application</param-name>
-		<param-value>com.nico.nputest2015.rest.App</param-value>
+		<param-value>com.nico.revision.rest.App</param-value>
 	</context-param>
 
 	<context-param>

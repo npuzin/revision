@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nputest2015', ['ngRoute'])
+angular.module('revision', ['ngRoute'])
 
  .config(function ($routeProvider) {
 

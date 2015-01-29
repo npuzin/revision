@@ -1,4 +1,4 @@
-angular.module('nputest2015')
+angular.module('revision')
 
 .controller('HomeController', function ($scope) {
 	

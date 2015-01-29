@@ -5,7 +5,7 @@ angular.module('revision')
 
   $scope.$on('$ionicView.beforeEnter', function() {
 
-    $http.get('http://npurevision.appspot.com/rest/users').then(function(response) {
+    $http.get('http://localhost:8080/rest/users').then(function(response) {
       $scope.users = response.data;
     });
   });
