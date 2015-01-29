@@ -1,6 +1,11 @@
 angular.module('revision')
 
-.controller('MatieresCtrl', ['$scope', 'data', '$ionicModal', '$ionicPopup', function($scope,data, $ionicModal, $ionicPopup){
+.controller('MatieresCtrl', ['$scope', 'data', '$ionicModal', '$ionicPopup', '$http',
+  function($scope,data, $ionicModal, $ionicPopup, $http){
+
+  $http.get('http://npurevision.appspot.com/rest/users').then(function(response) {
+    $scope.users = response.data;
+  });
 
   $scope.loadData = function() {
 
