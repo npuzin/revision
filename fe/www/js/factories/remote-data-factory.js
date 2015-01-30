@@ -19,6 +19,36 @@ angular.module('revision')
     return dfr.promise;
   };
 
+  var updateFiche = function(fiche) {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/fiche/update';
+    $http.post(url, fiche).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject([]);
+    });
+
+    return dfr.promise;
+  };
+
+  var updateMatiere = function(matiere) {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/matiere/update';
+    $http.post(url, matiere).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject([]);
+    });
+
+    return dfr.promise;
+  };
+
   var getMatiere = function(matiereId) {
 
     var dfr = $q.defer();
@@ -39,6 +69,36 @@ angular.module('revision')
     var dfr = $q.defer();
     var url = globalConfig.getBackendUrl() + '/rest/matiere/'+ matiereId+ '/fiches';
     $http.get(url).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject([]);
+    });
+
+    return dfr.promise;
+  };
+
+  var deleteFiche = function(fiche) {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/fiche/delete';
+    $http.post(url,fiche).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject([]);
+    });
+
+    return dfr.promise;
+  };
+
+  var addFiche = function(fiche) {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/fiche/add';
+    $http.post(url,fiche).then(function(response) {
 
       dfr.resolve(response.data);
     }, function(response) {
@@ -102,6 +162,10 @@ angular.module('revision')
     getFiches: getFiches,
     addMatiere: addMatiere,
     deleteMatiere: deleteMatiere,
-    getMatiere: getMatiere
+    getMatiere: getMatiere,
+    updateMatiere: updateMatiere,
+    updateFiche: updateFiche,
+    deleteFiche: deleteFiche,
+    addFiche: addFiche
   }
 }]);

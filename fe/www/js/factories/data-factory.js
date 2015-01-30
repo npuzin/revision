@@ -14,31 +14,31 @@ angular.module('revision')
   };
   var initLocalStorage = function() {
 
-    if (!window.localStorage['matieres']) {
+    if (!windowlocalStorage['matieres']) {
       var matieres = [];
       // matieres.push({name:'Histoire',id:1, color:'yellow'});
       // matieres.push({name:'Géographie',id:2, color:'green'});
       // matieres.push({name:'Mathématiques',id:3, color:'blue'});
-      window.localStorage['matieres'] = JSON.stringify(matieres);
+      windowlocalStorage['matieres'] = JSON.stringify(matieres);
     }
 
-    // if (!window.localStorage['fiches_1']) {
+    // if (!windowlocalStorage['fiches_1']) {
     //   var fiches = [];
     //   fiches.push({name:'Test fiche histoire',id:1, guid: uuid2.newguid()});
-    //   window.localStorage['fiches_1'] = JSON.stringify(fiches);
+    //   windowlocalStorage['fiches_1'] = JSON.stringify(fiches);
     // }
   };
-  initLocalStorage();
+  //initLocalStorage();
   var getMatieres = function() {
 
-    return JSON.parse(window.localStorage['matieres']);
+    return JSON.parse(windowlocalStorage['matieres']);
   };
   var getFiches = function(matiereId) {
 
-    if (!window.localStorage['fiches_'+matiereId]) {
-      window.localStorage['fiches_'+matiereId] = '[]';
+    if (!windowlocalStorage['fiches_'+matiereId]) {
+      windowlocalStorage['fiches_'+matiereId] = '[]';
     }
-    return JSON.parse(window.localStorage['fiches_'+matiereId]);
+    return JSON.parse(windowlocalStorage['fiches_'+matiereId]);
   };
   var addMatiere = function(matiere) {
 
@@ -46,7 +46,7 @@ angular.module('revision')
     var max = getMaxId(matieres);
     matiere.id = max+1;
     matieres.push(matiere);
-    window.localStorage['matieres'] = JSON.stringify(matieres);
+    windowlocalStorage['matieres'] = JSON.stringify(matieres);
     return matieres;
   };
   var updateMatiere = function(matiere) {
@@ -57,7 +57,7 @@ angular.module('revision')
     });
     currentMatiere.name = matiere.name;
     currentMatiere.color = matiere.color;
-    window.localStorage['matieres'] = JSON.stringify(matieres);
+    windowlocalStorage['matieres'] = JSON.stringify(matieres);
     return matieres;
   };
   var deleteMatiere = function(matiereId) {
@@ -70,7 +70,7 @@ angular.module('revision')
     if (pos>=0) {
       matieres.splice(pos,1);
     }
-    window.localStorage['matieres'] = JSON.stringify(matieres);
+    windowlocalStorage['matieres'] = JSON.stringify(matieres);
     return matieres;
   };
   var addFiche = function(matiereId, fiche) {
@@ -80,7 +80,7 @@ angular.module('revision')
     fiche.id = max+1;
     fiche.guid = uuid2.newguid();
     fiches.push(fiche);
-    window.localStorage['fiches_'+matiereId] = JSON.stringify(fiches);
+    windowlocalStorage['fiches_'+matiereId] = JSON.stringify(fiches);
     return fiches;
   };
   var updateFiche = function(matiereId, fiche) {
@@ -90,7 +90,7 @@ angular.module('revision')
       return curr.id === fiche.id;
     });
     currentFiche.name = fiche.name;
-    window.localStorage['fiches_'+matiereId] = JSON.stringify(fiches);
+    windowlocalStorage['fiches_'+matiereId] = JSON.stringify(fiches);
     return fiches;
   };
   var deleteFiche = function(matiereId, ficheId) {
@@ -103,8 +103,8 @@ angular.module('revision')
     if (pos>=0) {
       fiches.splice(pos,1);
     }
-    window.localStorage.removeItem('fiche_'+currentFiche.guid);
-    window.localStorage['fiches_'+matiereId] = JSON.stringify(fiches);
+    windowlocalStorage.removeItem('fiche_'+currentFiche.guid);
+    windowlocalStorage['fiches_'+matiereId] = JSON.stringify(fiches);
     return fiches;
   };
   var getMatiere = function(matiereId) {
@@ -126,12 +126,12 @@ angular.module('revision')
   var getFicheContent = function(fiche) {
 
     var guid = fiche.guid;
-    return window.localStorage['fiche_'+guid];
+    return windowlocalStorage['fiche_'+guid];
   }
   var saveFicheContent = function(fiche, content) {
 
     var guid = fiche.guid;
-    window.localStorage['fiche_'+guid] = content;
+    windowlocalStorage['fiche_'+guid] = content;
   }
   return {
     getMatieres: getMatieres,

@@ -73,37 +73,43 @@ angular.module('revision')
         $scope.closeMatiereDialog();
       });
     } else {
-      $scope.matieres = data.updateMatiere($scope.matiereDialogData.matiere);
+      remoteData.updateMatiere($scope.matiereDialogData.matiere).then(function(matieres) {
+        $scope.matieres = matieres;
+        $scope.closeMatiereDialog();
+      });
     }
 
   };
 
   $scope.deleteMatiere = function() {
 
-    var fiches = data.getFiches($scope.matiereDialogData.matiere.id);
+    remoteData.getFiches($scope.matiereDialogData.matiere.id).then(function(fiches) {
 
-    if (fiches.length > 0) {
+      if (fiches.length > 0) {
 
-      $scope.closeMatiereDialog();
-      var myPopup = $ionicPopup.show({
-        template: 'La matière ne peut être effacée car elle contient des fiches',
-        title: 'Information',
-        buttons: [
-          {
-            text: '<b>OK</b>',
-            type: 'button-positive'
-          }
-        ]
-      });
-
-    } else {
-
-      remoteData.deleteMatiere($scope.matiereDialogData.matiere.id).then(function(matieres) {
-        $scope.matieres = matieres;
         $scope.closeMatiereDialog();
-      });
+        var myPopup = $ionicPopup.show({
+          template: 'La matière ne peut être effacée car elle contient des fiches',
+          title: 'Information',
+          buttons: [
+            {
+              text: '<b>OK</b>',
+              type: 'button-positive'
+            }
+          ]
+        });
 
-    }
+      } else {
+
+        remoteData.deleteMatiere($scope.matiereDialogData.matiere.id).then(function(matieres) {
+          $scope.matieres = matieres;
+          $scope.closeMatiereDialog();
+        });
+
+      }
+
+    });
+
 
   };
 

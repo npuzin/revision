@@ -11,15 +11,18 @@ angular.module('revision')
 
   $scope.loadData = function() {
 
-    $scope.matiere = data.getMatiere(parseInt($stateParams.matiereId));
-    if (!$scope.matiere) {
-      $location.path("/");
-    } else {
+    remoteData.getMatiere(parseInt($stateParams.matiereId)).then(function (matiere) {
+
+      $scope.matiere = matiere;
       //$scope.fiches = data.getFiches($scope.matiere.id);
       remoteData.getFiches($scope.matiere.id).then(function (fiches) {
         $scope.fiches = fiches;
       });
-    }
+
+    }, function () {
+      $location.path("/");
+    });
+
   }
 
   $scope.back = function() {
@@ -47,7 +50,9 @@ angular.module('revision')
       $scope.ficheDialogData.fiche = angular.copy(fiche);
       $scope.ficheDialogData.isNew = false;
     } else {
-      $scope.ficheDialogData.fiche = {};
+      $scope.ficheDialogData.fiche = {
+        matiereId: $scope.matiere.id
+      };
       $scope.ficheDialogData.isNew = true;
     }
     $scope.modal.show();
@@ -66,17 +71,27 @@ angular.module('revision')
   $scope.saveFiche = function() {
 
     if ($scope.ficheDialogData.isNew) {
-      $scope.fiches = data.addFiche($scope.matiere.id, $scope.ficheDialogData.fiche);
+      remoteData.addFiche($scope.ficheDialogData.fiche).then(function(fiches) {
+
+        $scope.fiches = fiches;
+        $scope.closeFicheDialog();
+      });
     } else {
-      $scope.fiches = data.updateFiche($scope.matiere.id, $scope.ficheDialogData.fiche);
+      remoteData.updateFiche($scope.ficheDialogData.fiche).then(function(fiches) {
+        $scope.fiches = fiches;
+        $scope.closeFicheDialog();
+      });
     }
-    $scope.closeFicheDialog();
+
   };
 
   $scope.deleteFiche = function() {
 
-    $scope.fiches = data.deleteFiche($scope.matiere.id, $scope.ficheDialogData.fiche.id);
-    $scope.closeFicheDialog();
+    remoteData.deleteFiche($scope.ficheDialogData.fiche).then(function(fiches) {
+      $scope.fiches = fiches;
+      $scope.closeFicheDialog();
+    })
+
   };
 
 }]);

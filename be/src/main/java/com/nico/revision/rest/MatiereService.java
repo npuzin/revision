@@ -52,6 +52,21 @@ public class MatiereService {
 		return matiere;
 	}
 	
+	@Path("/matiere/update")
+	@POST
+	@Produces("application/json; charset=UTF-8")
+	public List<Matiere> updateMatiere(Matiere matiere) throws Exception {
+												
+		
+		EntityManager em = EMFactory.createEntityManager();	
+		em.getTransaction().begin();
+		em.merge(matiere);
+		em.getTransaction().commit();
+		em.close();
+				
+		return getMatieres(matiere.getUserId());
+	}
+	
 	@Path("/matiere/add")
 	@POST
 	@Consumes("application/json")
