@@ -7,7 +7,22 @@ angular.module('revision')
   var getMatieres = function() {
 
     var dfr = $q.defer();
-    var url = globalConfig.backendUrl + '/rest/matieres?userId=' + userId;
+    var url = globalConfig.getBackendUrl() + '/rest/matieres?userId=' + userId;
+    $http.get(url).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject([]);
+    });
+
+    return dfr.promise;
+  };
+
+  var getMatiere = function(matiereId) {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/matiere/' + matiereId + '?userId=' + userId;
     $http.get(url).then(function(response) {
 
       dfr.resolve(response.data);
@@ -22,7 +37,7 @@ angular.module('revision')
   var getFiches = function(matiereId) {
 
     var dfr = $q.defer();
-    var url = globalConfig.backendUrl + '/rest/matiere/'+ matiereId+ '/fiches';
+    var url = globalConfig.getBackendUrl() + '/rest/matiere/'+ matiereId+ '/fiches';
     $http.get(url).then(function(response) {
 
       dfr.resolve(response.data);
@@ -37,20 +52,9 @@ angular.module('revision')
   var addMatiere = function(matiere) {
 
     var dfr = $q.defer();
-    var url = globalConfig.backendUrl + '/rest/matiere/add?userId=' + userId;
-    var data = {
-      name: matiere.name,
-      color: matiere.color
-    };
+    var url = globalConfig.getBackendUrl() + '/rest/matiere/add?userId=' + userId;
 
-    $http({method: 'POST',
-      url: url,
-      data: data,
-      headers: {
-        //'Content-Type': undefined,
-        //'Access-Control-Allow-Origin': '*'
-      }
-    }).then(function(response) {
+    $http.post(url, matiere).then(function(response) {
 
       dfr.resolve(response.data);
     }, function(response) {
@@ -62,9 +66,42 @@ angular.module('revision')
 
   };
 
+  var deleteMatiere = function(matiereId) {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/matiere/delete?userId=' + userId;
+    var matiere = {
+      id: matiereId
+    };
+
+    $http.post(url, matiere).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject([]);
+    });
+
+    return dfr.promise;
+
+
+    var matieres = getMatieres();
+    var currentMatiere = _.find(matieres, function(curr) {
+      return curr.id === matiereId;
+    });
+    var pos = matieres.indexOf(currentMatiere);
+    if (pos>=0) {
+      matieres.splice(pos,1);
+    }
+    window.localStorage['matieres'] = JSON.stringify(matieres);
+    return matieres;
+  }
+
   return {
     getMatieres: getMatieres,
     getFiches: getFiches,
-    addMatiere: addMatiere
+    addMatiere: addMatiere,
+    deleteMatiere: deleteMatiere,
+    getMatiere: getMatiere
   }
 }]);

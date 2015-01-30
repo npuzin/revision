@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="revision" ng-class="{dev:globalConfig.isDev(), prod:globalConfig.isProd()}" ng-controller="MainCtrl">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -24,9 +24,11 @@
     <script src="js/controllers/fiche-controller.js"></script>
     <script src="js/factories/data-factory.js"></script>
     <script src="js/factories/remote-data-factory.js"></script>
+    <script src="js/factories/global-config-factory.js"></script>
+    <script src="js/controllers/main-controller.js"></script>
 
   </head>
-  <body ng-app="revision">
+  <body>
 
   <ion-nav-bar class="bar-positive">
   </ion-nav-bar>

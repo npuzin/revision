@@ -1,12 +1,6 @@
 
 angular.module('revision', ['ionic','angularUUID2'])
 
-.constant('globalConfig', {
-
-  backendUrl: 'http://localhost:8080' // 'http://npurevision.appspot.com'
-
-})
-
 .run(function($ionicPlatform) {
 
 
@@ -51,10 +45,10 @@ angular.module('revision', ['ionic','angularUUID2'])
     templateUrl: 'views/fiche.html',
     controller: 'FicheCtrl'
   });
-})
+});
 
-.factory('$exceptionHandler', function() {
+/*.factory('$exceptionHandler', function() {
   return function(exception, cause) {
     throw exception;
   };
-});
+});*/

@@ -21,9 +21,8 @@ public class FicheService {
 	@Path("/matiere/{matiereId}/fiches")
 	@GET
 	@Produces("application/json; charset=UTF-8")
-	public List<Fiche> getFiches(@Context HttpResponse response, @PathParam("matiereId") Integer matiereId) throws Exception {
-						
-		response.getOutputHeaders().putSingle("Access-Control-Allow-Origin", "*");				
+	public List<Fiche> getFiches(@PathParam("matiereId") Integer matiereId) throws Exception {
+												
 		
 		EntityManager em = EMFactory.createEntityManager();		
 		List<Fiche> fiches = em.createQuery("FROM Fiche where matiereId=:matiereId", Fiche.class)
@@ -31,7 +30,7 @@ public class FicheService {
 				.getResultList();		
 		em.close();
 				
-		return fiches;
+		return fiches; 
 	}
 	
 }

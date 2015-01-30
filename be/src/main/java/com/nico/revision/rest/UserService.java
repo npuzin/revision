@@ -21,15 +21,13 @@ public class UserService {
 	@Path("/users")
 	@GET
 	@Produces("application/json; charset=UTF-8")
-	public List<User> getUsers(@Context HttpResponse response) throws Exception {
-						
-		response.getOutputHeaders().putSingle("Access-Control-Allow-Origin", "*");				
-		
+	public List<User> getUsers() throws Exception {
+												
 		EntityManager em = EMFactory.createEntityManager();	
 		List<User> users = em.createQuery("FROM User", User.class).getResultList();		
 		em.close();
 				
-		return users;
+		return users; 
 	}
 	
 }

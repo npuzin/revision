@@ -70,11 +70,12 @@ angular.module('revision')
       //$scope.matieres = data.addMatiere($scope.matiereDialogData.matiere);
       remoteData.addMatiere($scope.matiereDialogData.matiere).then(function(matieres) {
         $scope.matieres = matieres;
+        $scope.closeMatiereDialog();
       });
     } else {
       $scope.matieres = data.updateMatiere($scope.matiereDialogData.matiere);
     }
-    $scope.closeMatiereDialog();
+
   };
 
   $scope.deleteMatiere = function() {
@@ -97,8 +98,10 @@ angular.module('revision')
 
     } else {
 
-      $scope.matieres = data.deleteMatiere($scope.matiereDialogData.matiere.id);
-      $scope.closeMatiereDialog();
+      remoteData.deleteMatiere($scope.matiereDialogData.matiere.id).then(function(matieres) {
+        $scope.matieres = matieres;
+        $scope.closeMatiereDialog();
+      });
 
     }
 

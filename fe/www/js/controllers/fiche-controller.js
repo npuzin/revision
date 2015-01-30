@@ -1,6 +1,7 @@
 angular.module('revision')
 
-.controller('FicheCtrl', ['$scope', 'data', '$ionicModal', '$stateParams', '$location', '$timeout', function($scope,data, $ionicModal, $stateParams, $location, $timeout){
+.controller('FicheCtrl', ['$scope', 'data', '$ionicModal', '$stateParams', '$location', '$timeout', 'remoteData',
+ function($scope,data, $ionicModal, $stateParams, $location, $timeout, remoteData){
 
   $scope.editor = null;
 
@@ -59,10 +60,10 @@ angular.module('revision')
 
   $scope.loadData = function() {
 
-    $scope.matiere = data.getMatiere(parseInt($stateParams.matiereId));
-    if (!$scope.matiere) {
-      $location.path("/");
-    } else {
+    $scope.matiere = remoteData.getMatiere(parseInt($stateParams.matiereId)).then(function (matiere) {
+
+      $scope.matiere = matiere;
+
       $scope.fiche = data.getFiche($scope.matiere.id, parseInt($stateParams.ficheId));
       if (!$scope.fiche) {
         $location.path("/matiere/" + $scope.matiere.id);
@@ -71,7 +72,11 @@ angular.module('revision')
       if (!$scope.ficheContent) {
         $scope.ficheContent = '';
       }
-    }
+
+    }, function() {
+      $location.path("/");
+    });
+
   }
 
   $scope.$on("$destroy", function() {
