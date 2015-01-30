@@ -12,23 +12,16 @@ import javax.persistence.Table;
 public class User {
 
 	private int id;
-	private String email;	
-	
-	public User() {
-  	}
-
-  	public User(String email) {
-	    this.email = email;	    
-  	}
+	private String email;		
 
   	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}
-	private void setId(int id) {
-	    this.id = id;
-	}
+  	public void setId(int id) {
+  		this.id = id;
+  	}
 
 	@Column(name="email")
 	public String getEmail() {

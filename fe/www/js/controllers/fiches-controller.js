@@ -1,7 +1,13 @@
 angular.module('revision')
 
-.controller('FichesCtrl', ['$scope', 'data', '$ionicModal', '$stateParams', '$location', function($scope,data, $ionicModal, $stateParams, $location){
+.controller('FichesCtrl', ['$scope', 'data', '$ionicModal', '$stateParams', '$location', 'remoteData',
+  function($scope,data, $ionicModal, $stateParams, $location, remoteData){
 
+
+  $scope.$on('$ionicView.beforeEnter', function() {
+
+    $scope.loadData();
+  });
 
   $scope.loadData = function() {
 
@@ -9,10 +15,12 @@ angular.module('revision')
     if (!$scope.matiere) {
       $location.path("/");
     } else {
-      $scope.fiches = data.getFiches($scope.matiere.id);
+      //$scope.fiches = data.getFiches($scope.matiere.id);
+      remoteData.getFiches($scope.matiere.id).then(function (fiches) {
+        $scope.fiches = fiches;
+      });
     }
   }
-  $scope.loadData();
 
   $scope.back = function() {
     $location.path("/");

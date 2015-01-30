@@ -11,6 +11,8 @@ public class App extends Application {
   
 	public  App() {		
 		singletons.add(new UserService());
+		singletons.add(new MatiereService());
+		singletons.add(new FicheService());
 	}
 
 	@Override

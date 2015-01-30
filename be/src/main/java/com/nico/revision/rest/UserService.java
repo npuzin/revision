@@ -8,31 +8,27 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 
+import org.jboss.resteasy.spi.HttpResponse;
+
 import com.nico.revision.model.User;
 
 
 @Path("/rest")
 public class UserService {
 				
-	
-	@Context org.jboss.resteasy.spi.HttpResponse response;
+		
 	
 	@Path("/users")
 	@GET
-	@Produces("application/json")
-	public List<User> getUsers() throws Exception {
+	@Produces("application/json; charset=UTF-8")
+	public List<User> getUsers(@Context HttpResponse response) throws Exception {
 						
 		response.getOutputHeaders().putSingle("Access-Control-Allow-Origin", "*");				
 		
-		EntityManager em = EMFactory.createEntityManager();
-		em.getTransaction().begin();
-		List<User> users = em
-		        .createQuery("FROM User", User.class)
-		        .getResultList();
-		em.getTransaction().commit();
+		EntityManager em = EMFactory.createEntityManager();	
+		List<User> users = em.createQuery("FROM User", User.class).getResultList();		
 		em.close();
-		
-		users.add(new User("hardcoded email"));
+				
 		return users;
 	}
 	

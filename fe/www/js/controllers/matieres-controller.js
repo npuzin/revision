@@ -1,21 +1,21 @@
 angular.module('revision')
 
-.controller('MatieresCtrl', ['$scope', 'data', '$ionicModal', '$ionicPopup', '$http',
-  function($scope,data, $ionicModal, $ionicPopup, $http){
+.controller('MatieresCtrl', ['$scope', 'data', '$ionicModal', '$ionicPopup', '$http', 'remoteData',
+  function($scope,data, $ionicModal, $ionicPopup, $http, remoteData){
 
   $scope.$on('$ionicView.beforeEnter', function() {
 
-    $http.get('http://npurevision.appspot.com/rest/users').then(function(response) {
-      $scope.users = response.data;
-    });
+    $scope.loadData();
   });
 
 
   $scope.loadData = function() {
 
-    $scope.matieres = data.getMatieres();
+    //$scope.matieres = data.getMatieres();
+    remoteData.getMatieres().then(function(matieres) {
+      $scope.matieres = matieres;
+    });
   };
-  $scope.loadData();
 
   $scope.matiereDialogData = {};
 

@@ -1,6 +1,12 @@
 
 angular.module('revision', ['ionic','angularUUID2'])
 
+.constant('globalConfig', {
+
+  backendUrl: 'http://npurevision.appspot.com' //'http://localhost:8080'
+
+})
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

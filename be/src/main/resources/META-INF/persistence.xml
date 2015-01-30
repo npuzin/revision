@@ -5,6 +5,8 @@
 	<persistence-unit name="test" >
 				
 		<class>com.nico.revision.model.User</class>				
+		<class>com.nico.revision.model.Matiere</class>
+		<class>com.nico.revision.model.Fiche</class>
 		
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />			
