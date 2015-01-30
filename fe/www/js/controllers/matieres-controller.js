@@ -67,7 +67,10 @@ angular.module('revision')
   $scope.saveMatiere = function() {
 
     if ($scope.matiereDialogData.isNew) {
-      $scope.matieres = data.addMatiere($scope.matiereDialogData.matiere);
+      //$scope.matieres = data.addMatiere($scope.matiereDialogData.matiere);
+      remoteData.addMatiere($scope.matiereDialogData.matiere).then(function(matieres) {
+        $scope.matieres = matieres;
+      });
     } else {
       $scope.matieres = data.updateMatiere($scope.matiereDialogData.matiere);
     }

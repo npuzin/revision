@@ -3,11 +3,14 @@ angular.module('revision', ['ionic','angularUUID2'])
 
 .constant('globalConfig', {
 
-  backendUrl: 'http://npurevision.appspot.com' //'http://localhost:8080'
+  backendUrl: 'http://localhost:8080' // 'http://npurevision.appspot.com'
 
 })
 
 .run(function($ionicPlatform) {
+
+
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,7 +23,8 @@ angular.module('revision', ['ionic','angularUUID2'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+
 
   window.onerror = function(errorMsg, url, lineNumber) {
     //alert(errorMsg + '\n\nFile ' + url + ' line ' +lineNumber);
