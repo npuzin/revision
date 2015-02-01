@@ -14,7 +14,7 @@
 
   <div class="list">
 
-     <a class="item item-icon-right" href="#/matiere/{{matiere.id}}/fiche/{{fiche.id}}" ng-repeat="fiche in fiches">
+     <a class="item item-icon-right" href="#/matiere/{{matiere.id}}/fiche/{{fiche.guid}}" ng-repeat="fiche in fiches">
       {{fiche.name}}
       <button class="button icon ion-more button-main" ng-click="openFicheDialog($event,fiche)"></button>
     </a>

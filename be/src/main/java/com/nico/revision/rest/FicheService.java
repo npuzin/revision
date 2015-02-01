@@ -10,13 +10,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-
-import org.jboss.resteasy.spi.HttpResponse;
 
 import com.nico.revision.model.Fiche;
-import com.nico.revision.model.Matiere;
 
 
 @Path("/rest")
@@ -30,7 +25,7 @@ public class FicheService {
 												
 		
 		EntityManager em = EMFactory.createEntityManager();		
-		List<Fiche> fiches = em.createQuery("FROM Fiche where matiereId=:matiereId", Fiche.class)
+		List<Fiche> fiches = em.createQuery("select new com.nico.revision.model.Fiche(guid,matiereId,name) FROM Fiche where matiereId=:matiereId", Fiche.class)
 				.setParameter("matiereId", matiereId)
 				.getResultList();		
 		em.close();
@@ -84,5 +79,32 @@ public class FicheService {
 		em.close();
 				
 		return this.getFiches(fiche.getMatiereId());
-	}	
+	}
+	
+	@Path("/fiche/{guid}")
+	@GET
+	@Produces("application/json; charset=UTF-8")
+	public Fiche getFiche(@PathParam("guid") String guid) throws Exception {
+									
+		EntityManager em = EMFactory.createEntityManager();				
+		Fiche fiche = em.find(Fiche.class, guid);
+		em.close();
+				
+		return fiche;
+	}
+	
+	@Path("/fiche")
+	@POST
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	public Fiche saveFiche(Fiche fiche) throws Exception {
+									
+		EntityManager em = EMFactory.createEntityManager();				
+		em.getTransaction().begin();
+		em.merge(fiche);
+		em.getTransaction().commit();
+		em.close();
+				
+		return fiche;
+	}
 }

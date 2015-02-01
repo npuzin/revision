@@ -41,7 +41,7 @@ angular.module('revision', ['ionic','angularUUID2'])
   })
 
   .state('fiche', {
-    url: '/matiere/:matiereId/fiche/:ficheId',
+    url: '/matiere/:matiereId/fiche/:guid',
     templateUrl: 'views/fiche.html',
     controller: 'FicheCtrl'
   });

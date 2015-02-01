@@ -6,9 +6,6 @@ import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-
-import org.jboss.resteasy.spi.HttpResponse;
 
 import com.nico.revision.model.User;
 

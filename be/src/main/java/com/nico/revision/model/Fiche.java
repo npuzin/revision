@@ -12,7 +12,17 @@ public class Fiche {
 	private String guid;
 	private String name;	
 	private int matiereId;
+	private String content;
+	
+	public Fiche()
+	{}
 
+	public Fiche(String guid, int matiereId, String name) {
+		this.guid = guid;
+		this.matiereId = matiereId;
+		this.name = name;
+	}
+	
   	@Id	
   	@Column(name="guid")
   	public String getGuid() {
@@ -38,5 +48,12 @@ public class Fiche {
 		this.matiereId = matiereId;
 	}
 	
+	@Column(name="content")
+	public String getContent() {
+		return this.content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	
 }

@@ -126,6 +126,40 @@ angular.module('revision')
 
   };
 
+  var getFiche = function(guid) {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/fiche/' + guid;
+
+    $http.get(url).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject();
+    });
+
+    return dfr.promise;
+
+  };
+
+ var saveFiche = function(fiche) {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/fiche';
+
+    $http.post(url, fiche).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject();
+    });
+
+    return dfr.promise;
+
+  };
+
   var deleteMatiere = function(matiereId) {
 
     var dfr = $q.defer();
@@ -166,6 +200,8 @@ angular.module('revision')
     updateMatiere: updateMatiere,
     updateFiche: updateFiche,
     deleteFiche: deleteFiche,
-    addFiche: addFiche
+    addFiche: addFiche,
+    getFiche: getFiche,
+    saveFiche: saveFiche
   }
 }]);

@@ -31,8 +31,12 @@ angular.module('revision')
 
     $timeout(function() {
 
-      $scope.setHeaderButtonsReadOnly($scope.ficheContent !== '');
-      $scope.initCKEditor(($scope.ficheContent !== ''));
+      var readonly = false;
+      if ($scope.fiche && $scope.fiche.content !== '') {
+        readonly = true;
+      }
+      $scope.setHeaderButtonsReadOnly(readonly);
+      $scope.initCKEditor(readonly);
 
     },0);
 
@@ -54,9 +58,8 @@ angular.module('revision')
           top: 'subheader'
       }
     });
-    $scope.editor.setData($scope.ficheContent);
+    $scope.editor.setData($scope.fiche ? $scope.fiche.content : '');
   }
-
 
   $scope.loadData = function() {
 
@@ -64,14 +67,14 @@ angular.module('revision')
 
       $scope.matiere = matiere;
 
-      $scope.fiche = data.getFiche($scope.matiere.id, parseInt($stateParams.ficheId));
-      if (!$scope.fiche) {
+      remoteData.getFiche($stateParams.guid).then(function(fiche) {
+
+        $scope.fiche = fiche;
+
+
+      }, function() {
         $location.path("/matiere/" + $scope.matiere.id);
-      }
-      $scope.ficheContent = data.getFicheContent($scope.fiche);
-      if (!$scope.ficheContent) {
-        $scope.ficheContent = '';
-      }
+      });
 
     }, function() {
       $location.path("/");
@@ -85,12 +88,6 @@ angular.module('revision')
 
   $scope.loadData();
 
-  var saveFiche = function() {
-
-    $scope.ficheContent = $scope.editor.getData();
-    data.saveFicheContent($scope.fiche, $scope.ficheContent);
-  }
-
   $scope.modifierFiche = function() {
 
     $scope.setHeaderButtonsReadOnly(false);
@@ -99,26 +96,31 @@ angular.module('revision')
 
   $scope.saveFiche = function() {
 
-    saveFiche();
-    $scope.setHeaderButtonsReadOnly(true);
-    $scope.initCKEditor(true);
+    remoteData.saveFiche($scope.fiche).then(function(fiche){
+      $scope.setHeaderButtonsReadOnly(true);
+      $scope.initCKEditor(true);
+    });
+
   };
 
   $scope.cancel = function() {
 
-    if ($scope.ficheContent === '') {
+    if ($scope.fiche.content === '') {
       $location.path('/matiere/' + $scope.matiere.id);
     } else {
       $scope.loadData();
-      $scope.setHeaderButtonsReadOnly($scope.ficheContent !== '');
-      $scope.initCKEditor(($scope.ficheContent !== ''));
+      $scope.setHeaderButtonsReadOnly($scope.fiche.content !== '');
+      $scope.initCKEditor(($scope.fiche.content !== ''));
     }
 
   }
 
   $scope.saveFicheAndBack = function() {
 
-    saveFiche();
-    $location.path('/matiere/' + $scope.matiere.id);
+    $scope.fiche.content = $scope.editor.getData();
+    remoteData.saveFiche($scope.fiche).then(function(fiche){
+      $location.path('/matiere/' + $scope.fiche.matiereId);
+    });
+
   };
 }]);
