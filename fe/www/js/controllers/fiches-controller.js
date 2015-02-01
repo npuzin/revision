@@ -47,15 +47,21 @@ angular.module('revision')
     $event.preventDefault();
 
     if (fiche) {
-      $scope.ficheDialogData.fiche = angular.copy(fiche);
-      $scope.ficheDialogData.isNew = false;
+
+      remoteData.getFiche(fiche.guid).then(function (fiche) {
+
+        $scope.ficheDialogData.fiche = fiche;
+        $scope.ficheDialogData.isNew = false;
+        $scope.modal.show();
+      });
     } else {
       $scope.ficheDialogData.fiche = {
         matiereId: $scope.matiere.id
       };
       $scope.ficheDialogData.isNew = true;
+      $scope.modal.show();
     }
-    $scope.modal.show();
+
   };
 
   $scope.closeFicheDialog = function() {
