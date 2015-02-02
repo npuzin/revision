@@ -15,8 +15,8 @@
 
   <ion-content>
 
-    <textarea class="ckeditor" name="editor1" >
-    </textarea>
+    <textarea class="ckeditor" name="editor1" ng-model="fiche.content" ready="onReady()" options="options" ckeditor></textarea>
+    <div ng-bind="fiche.content"></div>
 
 	</ion-content>
 </ion-view>

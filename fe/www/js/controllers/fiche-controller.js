@@ -3,7 +3,36 @@ angular.module('revision')
 .controller('FicheCtrl', ['$scope', 'data', '$ionicModal', '$stateParams', '$location', '$timeout', 'remoteData',
  function($scope,data, $ionicModal, $stateParams, $location, $timeout, remoteData){
 
-  $scope.editor = null;
+  $scope.fiche = {};
+
+  $scope.options = {
+    language: 'fr'
+  };
+
+  $scope.loadData = function() {
+
+    $scope.matiere = remoteData.getMatiere(parseInt($stateParams.matiereId)).then(function (matiere) {
+
+      $scope.matiere = matiere;
+
+      remoteData.getFiche($stateParams.guid).then(function(fiche) {
+
+        $scope.fiche = fiche;
+
+      }, function() {
+        $location.path("/matiere/" + $scope.matiere.id);
+      });
+
+    }, function() {
+      $location.path("/");
+    });
+
+  }
+
+  $scope.loadData();
+
+
+  /*$scope.editor = null;
 
   $scope.isReadOnly = function() {
     return $('#btnModify').is(':visible');
@@ -61,32 +90,12 @@ angular.module('revision')
     $scope.editor.setData($scope.fiche ? $scope.fiche.content : '');
   }
 
-  $scope.loadData = function() {
 
-    $scope.matiere = remoteData.getMatiere(parseInt($stateParams.matiereId)).then(function (matiere) {
-
-      $scope.matiere = matiere;
-
-      remoteData.getFiche($stateParams.guid).then(function(fiche) {
-
-        $scope.fiche = fiche;
-
-
-      }, function() {
-        $location.path("/matiere/" + $scope.matiere.id);
-      });
-
-    }, function() {
-      $location.path("/");
-    });
-
-  }
 
   $scope.$on("$destroy", function() {
       $scope.editor.destroy();
   });
 
-  $scope.loadData();
 
   $scope.modifierFiche = function() {
 
@@ -122,5 +131,5 @@ angular.module('revision')
       $location.path('/matiere/' + $scope.fiche.matiereId);
     });
 
-  };
+  };*/
 }]);
