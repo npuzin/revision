@@ -165,12 +165,15 @@ angular.module('revision')
 
   };
 
-  var login = function() {
+  var login = function(email) {
 
     var dfr = $q.defer();
-    var url = globalConfig.getBackendUrl() + '/rest/login/1';
+    var url = globalConfig.getBackendUrl() + '/rest/login';
 
-    $http.get(url).then(function(response) {
+    var user = {
+      email: email
+    };
+    $http.post(url, user).then(function(response) {
 
       dfr.resolve(response.data);
     }, function(response) {

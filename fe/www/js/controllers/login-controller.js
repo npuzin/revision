@@ -5,9 +5,9 @@ angular.module('revision')
 
   $scope.login = function() {
 
-    remoteData.login().then(function(user) {
+    remoteData.login('nicolas.puzin@gmail.com').then(function(session) {
 
-        $cookieStore.put('User-Id', user.id);
+        $cookieStore.put('Session-Id', session.sessionId);
         $location.path('/matieres');
     });
   }

@@ -11,6 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nico.revision.model.Session;
+
 
 public class SecurityFilter implements Filter {
 
@@ -27,12 +29,20 @@ public class SecurityFilter implements Filter {
     		filterChain.doFilter(request, response);
     	} else {
     	
-    		String userId = req.getHeader("User-Id");
-        	HttpServletResponse resp = (HttpServletResponse) response;
-    		if (userId != null) {	    			        	
-	        	filterChain.doFilter(request, response);
-    		} else {
+    		HttpServletResponse resp = (HttpServletResponse) response;
+    		
+    		String sessionId = req.getHeader("Session-Id");
+    		if (sessionId == null) {
     			resp.sendError(403);
+    		} else {
+	    		SessionService srv = new SessionService();
+	    		Session session = srv.getSession(sessionId);
+	    		 
+	        	if (session != null) {	    			        	
+		        	filterChain.doFilter(request, response);
+	    		} else {
+	    			resp.sendError(403);
+	    		}
     		}
     	}
     	

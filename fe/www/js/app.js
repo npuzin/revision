@@ -24,8 +24,8 @@ angular.module('revision', ['ionic','angularUUID2','ngCookies'])
     return {
 
       request: function(config) {
-        var userId = $cookieStore.get('User-Id');
-        config.headers['User-Id'] = userId;
+        var sessionId = $cookieStore.get('Session-Id');
+        config.headers['Session-Id'] = sessionId;
         return config;
       },
 
@@ -35,10 +35,9 @@ angular.module('revision', ['ionic','angularUUID2','ngCookies'])
           return responseOrNewPromise
         }*/
         if (rejection.status === 403) {
-          return $location.path('/login');
-        } else {
-          return $q.reject(rejection);
+          $location.path('/login');
         }
+        return $q.reject(rejection);
       }
     };
   });
