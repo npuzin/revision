@@ -69,7 +69,7 @@ public class FicheService {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json; charset=UTF-8")
-	public List<Fiche> addFiche(Fiche fiche) throws Exception {
+	public Fiche addFiche(Fiche fiche) throws Exception {
 									
 		EntityManager em = EMFactory.createEntityManager();				
 		fiche.setGuid(UUID.randomUUID().toString());
@@ -78,7 +78,7 @@ public class FicheService {
 		em.getTransaction().commit();		
 		em.close();
 				
-		return this.getFiches(fiche.getMatiereId());
+		return fiche;
 	}
 	
 	@Path("/fiche/{guid}")

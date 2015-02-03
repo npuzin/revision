@@ -77,10 +77,10 @@ angular.module('revision')
   $scope.saveFiche = function() {
 
     if ($scope.ficheDialogData.isNew) {
-      remoteData.addFiche($scope.ficheDialogData.fiche).then(function(fiches) {
+      remoteData.addFiche($scope.ficheDialogData.fiche).then(function(fiche) {
 
-        $scope.fiches = fiches;
         $scope.closeFicheDialog();
+        $location.path('/matiere/' + fiche.matiereId + '/fiche/' + fiche.guid);
       });
     } else {
       remoteData.updateFiche($scope.ficheDialogData.fiche).then(function(fiches) {

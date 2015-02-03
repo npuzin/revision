@@ -1,7 +1,7 @@
 <ion-view id="fiche" cache-view="false" view-title="{{fiche.name}}" ng-class="{red:matiere.color === 'red',yellow:matiere.color === 'yellow',green:matiere.color === 'green',blue:matiere.color === 'blue',readonly: isReadOnly()}" >
 
   <ion-nav-buttons side="left">
-    <button id="btnBack" nav-direction="back" class="button button-main icon ion-ios7-arrow-back" ng-click="saveFicheAndBack()" style="display:none">&nbsp;{{matiere.name}}</button>
+    <button id="btnBack" nav-direction="back" class="button button-main icon ion-ios7-arrow-back" ng-click="back()" style="display:none">&nbsp;{{matiere.name}}</button>
     <button id="btnCancel" class="button button-main" ng-click="cancel()" style="display:none" >Cancel</button>
   </ion-nav-buttons>
 
@@ -15,8 +15,8 @@
 
   <ion-content>
 
-    <textarea class="ckeditor" name="editor1" ng-model="fiche.content" ready="onReady()" options="options" ckeditor></textarea>
-    <div ng-bind="fiche.content"></div>
+    <textarea class="ckeditor" name="editor1" >
+    </textarea>
 
 	</ion-content>
 </ion-view>
