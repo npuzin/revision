@@ -4,16 +4,14 @@ angular.module('revision')
   function($scope,data, $ionicModal, $stateParams, $location, remoteData){
 
 
-  $scope.$on('$ionicView.beforeEnter', function() {
-
-    $scope.loadData();
-  });
-
   $scope.loadData = function() {
 
     remoteData.getMatiere(parseInt($stateParams.matiereId)).then(function (matiere) {
 
       $scope.matiere = matiere;
+
+      $('ion-header-bar div.title').text(matiere.name);
+
       //$scope.fiches = data.getFiches($scope.matiere.id);
       remoteData.getFiches($scope.matiere.id).then(function (fiches) {
         $scope.fiches = fiches;
@@ -23,7 +21,9 @@ angular.module('revision')
       $location.path("/");
     });
 
-  }
+  };
+
+  $scope.loadData();
 
   $scope.back = function() {
     $location.path("/");
@@ -71,7 +71,6 @@ angular.module('revision')
   $scope.$on('$destroy',function() {
 
     $scope.modal.remove();
-    console.log('Fiche Dialog destroyed');
   });
 
   $scope.saveFiche = function() {

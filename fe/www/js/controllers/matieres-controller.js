@@ -3,10 +3,6 @@ angular.module('revision')
 .controller('MatieresCtrl', ['$scope', 'data', '$ionicModal', '$ionicPopup', '$http', 'remoteData',
   function($scope,data, $ionicModal, $ionicPopup, $http, remoteData){
 
-  $scope.$on('$ionicView.beforeEnter', function() {
-
-    $scope.loadData();
-  });
 
 
   $scope.loadData = function() {
@@ -16,6 +12,8 @@ angular.module('revision')
       $scope.matieres = matieres;
     });
   };
+
+  $scope.loadData();
 
   $scope.matiereDialogData = {};
 
@@ -61,7 +59,6 @@ angular.module('revision')
   $scope.$on('$destroy', function() {
 
     $scope.modal.remove();
-    console.log('Matiere Dialog destroyed');
   });
 
   $scope.saveMatiere = function() {

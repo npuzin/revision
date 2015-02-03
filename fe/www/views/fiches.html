@@ -1,4 +1,4 @@
-<ion-view view-title="{{matiere.name}}" >
+<ion-view cache-view="false">
 
   <ion-nav-buttons side="left">
     <button nav-direction="back" class="button  button-main icon ion-ios7-arrow-back"
@@ -12,7 +12,7 @@
 
   <ion-content>
 
-  <div class="list">
+  <div class="list" style="margin-top:20px">
 
      <a class="item item-icon-right" href="#/matiere/{{matiere.id}}/fiche/{{fiche.guid}}" ng-repeat="fiche in fiches">
       {{fiche.name}}

@@ -56,7 +56,7 @@ angular.module('revision')
       }
     });
     $scope.editor.setData($scope.fiche ? $scope.fiche.content : '');
-  }
+  };
 
   $scope.loadData = function() {
 
@@ -67,6 +67,7 @@ angular.module('revision')
       remoteData.getFiche($stateParams.guid).then(function(fiche) {
 
         $scope.fiche = fiche;
+        $('ion-header-bar div.title').text(fiche.name);
         init();
 
       }, function() {
@@ -77,13 +78,14 @@ angular.module('revision')
       $location.path("/");
     });
 
-  }
-
-  $scope.$on("$destroy", function() {
-      $scope.editor.destroy();
-  });
+  };
 
   $scope.loadData();
+
+  $scope.$on("$destroy", function() {
+    //$scope.editor.destroy();
+  });
+
 
   $scope.modifierFiche = function() {
 

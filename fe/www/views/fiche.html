@@ -1,4 +1,4 @@
-<ion-view id="fiche" cache-view="false" view-title="{{fiche.name}}" ng-class="{red:matiere.color === 'red',yellow:matiere.color === 'yellow',green:matiere.color === 'green',blue:matiere.color === 'blue',readonly: isReadOnly()}" >
+<ion-view cache-view="false" id="fiche"   ng-class="{red:matiere.color === 'red',yellow:matiere.color === 'yellow',green:matiere.color === 'green',blue:matiere.color === 'blue',readonly: isReadOnly()}" >
 
   <ion-nav-buttons side="left">
     <button id="btnBack" nav-direction="back" class="button button-main icon ion-ios7-arrow-back" ng-click="back()" style="display:none">&nbsp;{{matiere.name}}</button>
