@@ -1,5 +1,5 @@
 
-angular.module('revision', ['ionic','angularUUID2'])
+angular.module('revision', ['ionic','angularUUID2','ngCookies'])
 
 .run(function($ionicPlatform) {
 
@@ -17,8 +17,33 @@ angular.module('revision', ['ionic','angularUUID2'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider, $provide) {
 
+
+  $provide.factory('myHttpInterceptor', function($q, $cookieStore, $location) {
+    return {
+
+      request: function(config) {
+        var userId = $cookieStore.get('User-Id');
+        config.headers['User-Id'] = userId;
+        return config;
+      },
+
+     responseError: function(rejection) {
+        // do something on error
+        /*if (canRecover(rejection)) {
+          return responseOrNewPromise
+        }*/
+        if (rejection.status === 403) {
+          return $location.path('/login');
+        } else {
+          return $q.reject(rejection);
+        }
+      }
+    };
+  });
+
+  $httpProvider.interceptors.push('myHttpInterceptor');
 
   window.onerror = function(errorMsg, url, lineNumber) {
     //alert(errorMsg + '\n\nFile ' + url + ' line ' +lineNumber);
@@ -44,6 +69,12 @@ angular.module('revision', ['ionic','angularUUID2'])
     url: '/matiere/:matiereId/fiche/:guid',
     templateUrl: 'views/fiche.html',
     controller: 'FicheCtrl'
+  })
+
+  .state('login', {
+    url: '/login',
+    templateUrl: 'views/login.html',
+    controller: 'LoginCtrl'
   });
 });
 
@@ -52,3 +83,4 @@ angular.module('revision', ['ionic','angularUUID2'])
     throw exception;
   };
 });*/
+

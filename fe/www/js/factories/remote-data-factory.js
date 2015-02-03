@@ -8,7 +8,12 @@ angular.module('revision')
 
     var dfr = $q.defer();
     var url = globalConfig.getBackendUrl() + '/rest/matieres?userId=' + userId;
-    $http.get(url).then(function(response) {
+    $http.get(url, {
+        headers: {
+          'My-Header' : 'value',
+          'My-Header2' : 'value2'
+        }
+      }).then(function(response) {
 
       dfr.resolve(response.data);
     }, function(response) {
@@ -160,6 +165,22 @@ angular.module('revision')
 
   };
 
+  var login = function() {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/login/1';
+
+    $http.get(url).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject();
+    });
+
+    return dfr.promise;
+  };
+
   var deleteMatiere = function(matiereId) {
 
     var dfr = $q.defer();
@@ -178,17 +199,6 @@ angular.module('revision')
 
     return dfr.promise;
 
-
-    var matieres = getMatieres();
-    var currentMatiere = _.find(matieres, function(curr) {
-      return curr.id === matiereId;
-    });
-    var pos = matieres.indexOf(currentMatiere);
-    if (pos>=0) {
-      matieres.splice(pos,1);
-    }
-    window.localStorage['matieres'] = JSON.stringify(matieres);
-    return matieres;
   }
 
   return {
@@ -202,6 +212,7 @@ angular.module('revision')
     deleteFiche: deleteFiche,
     addFiche: addFiche,
     getFiche: getFiche,
-    saveFiche: saveFiche
+    saveFiche: saveFiche,
+    login: login
   }
 }]);

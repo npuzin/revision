@@ -1,16 +1,19 @@
 angular.module('revision')
 
-.controller('MatieresCtrl', ['$scope', 'data', '$ionicModal', '$ionicPopup', '$http', 'remoteData',
-  function($scope,data, $ionicModal, $ionicPopup, $http, remoteData){
+.controller('MatieresCtrl', ['$scope', 'data', '$ionicModal', '$ionicPopup', '$http', 'remoteData', '$cookieStore',
+  function($scope,data, $ionicModal, $ionicPopup, $http, remoteData, $cookieStore){
 
 
 
   $scope.loadData = function() {
 
     //$scope.matieres = data.getMatieres();
+    $('ion-header-bar div.title').text('Classeur');
+
     remoteData.getMatieres().then(function(matieres) {
       $scope.matieres = matieres;
     });
+
   };
 
   $scope.loadData();
