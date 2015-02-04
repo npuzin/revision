@@ -65,7 +65,7 @@ angular.module('revision', ['ionic','angularUUID2','ngCookies'])
   })
 
   .state('fiche', {
-    url: '/matiere/:matiereId/fiche/:guid',
+    url: '/fiche/:guid',
     templateUrl: 'views/fiche.html',
     controller: 'FicheCtrl'
   })

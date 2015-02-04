@@ -3,6 +3,8 @@ package com.nico.revision.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,15 +13,15 @@ public class Fiche {
 
 	private String guid;
 	private String name;	
-	private int matiereId;
+	private Matiere matiere;
 	private String content;
 	
 	public Fiche()
 	{}
 
-	public Fiche(String guid, int matiereId, String name) {
+	public Fiche(String guid, Matiere matiere, String name) {
 		this.guid = guid;
-		this.matiereId = matiereId;
+		this.matiere = matiere;
 		this.name = name;
 	}
 	
@@ -40,12 +42,13 @@ public class Fiche {
 		this.name = name;
 	}
 	
-	@Column(name="matiere_id")
-	public int getMatiereId() {
-		return this.matiereId;
+	@OneToOne
+	@JoinColumn(name="matiere_id")
+	public Matiere getMatiere() {
+		return this.matiere;
 	}
-	public void setMatiereId(int matiereId) {
-		this.matiereId = matiereId;
+	public void setMatiere(Matiere matiere) {
+		this.matiere = matiere;
 	}
 	
 	@Column(name="content")

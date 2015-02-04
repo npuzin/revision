@@ -56,7 +56,7 @@ angular.module('revision')
       });
     } else {
       $scope.ficheDialogData.fiche = {
-        matiereId: $scope.matiere.id
+        matiere: $scope.matiere
       };
       $scope.ficheDialogData.isNew = true;
       $scope.modal.show();
@@ -79,7 +79,7 @@ angular.module('revision')
       remoteData.addFiche($scope.ficheDialogData.fiche).then(function(fiche) {
 
         $scope.closeFicheDialog();
-        $location.path('/matiere/' + fiche.matiereId + '/fiche/' + fiche.guid);
+        $location.path('/fiche/' + fiche.guid);
       });
     } else {
       remoteData.updateFiche($scope.ficheDialogData.fiche).then(function(fiches) {

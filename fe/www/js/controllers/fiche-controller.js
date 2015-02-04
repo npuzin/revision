@@ -50,7 +50,7 @@ angular.module('revision')
       language: 'fr',
       height: $(window).height()-readOnly,
       readOnly: readOnly,
-      bodyClass: $scope.matiere.color,
+      bodyClass: $scope.fiche.matiere.color,
       sharedSpaces: {
           top: 'subheader'
       }
@@ -60,19 +60,11 @@ angular.module('revision')
 
   $scope.loadData = function() {
 
-    $scope.matiere = remoteData.getMatiere(parseInt($stateParams.matiereId)).then(function (matiere) {
+    remoteData.getFiche($stateParams.guid).then(function(fiche) {
 
-      $scope.matiere = matiere;
-
-      remoteData.getFiche($stateParams.guid).then(function(fiche) {
-
-        $scope.fiche = fiche;
-        $('ion-header-bar div.title').text(fiche.name);
-        init();
-
-      }, function() {
-        $location.path("/matiere/" + $scope.matiere.id);
-      });
+      $scope.fiche = fiche;
+      $('ion-header-bar div.title').text(fiche.name);
+      init();
 
     }, function() {
       $location.path("/");
@@ -117,7 +109,7 @@ angular.module('revision')
 
   $scope.back = function() {
 
-    $location.path('/matiere/' + $scope.fiche.matiereId);
+    $location.path('/matiere/' + $scope.fiche.matiere.id);
 
   };
 }]);

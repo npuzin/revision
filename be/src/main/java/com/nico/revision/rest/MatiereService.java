@@ -28,8 +28,8 @@ public class MatiereService {
 		Session session = (Session) request.getAttribute("session");
 		
 		EntityManager em = EMFactory.createEntityManager();		
-		List<Matiere> matieres = em.createQuery("FROM Matiere where userId=:userId", Matiere.class)
-				.setParameter("userId", session.getUser().getId())
+		List<Matiere> matieres = em.createQuery("FROM Matiere where user=:user", Matiere.class)
+				.setParameter("user", session.getUser())
 				.getResultList();		
 		em.close();
 				
@@ -44,8 +44,8 @@ public class MatiereService {
 		Session session = (Session) request.getAttribute("session");
 		
 		EntityManager em = EMFactory.createEntityManager();		
-		Matiere matiere = em.createQuery("FROM Matiere where userId=:userId and id=:id", Matiere.class)
-				.setParameter("userId", session.getUser().getId())
+		Matiere matiere = em.createQuery("FROM Matiere where user=:user and id=:id", Matiere.class)
+				.setParameter("user", session.getUser())
 				.setParameter("id", matiereId)
 				.getSingleResult();		
 		em.close();
@@ -77,7 +77,7 @@ public class MatiereService {
 		Session session = (Session) request.getAttribute("session");
 		
 		EntityManager em = EMFactory.createEntityManager();				
-		matiere.setUserId(session.getUser().getId());
+		matiere.setUser(session.getUser());
 		em.getTransaction().begin();
 		em.persist(matiere);
 		em.getTransaction().commit();		
@@ -96,7 +96,7 @@ public class MatiereService {
 		Session session = (Session) request.getAttribute("session");
 		
 		EntityManager em = EMFactory.createEntityManager();				
-		matiere.setUserId(session.getUser().getId());
+		matiere.setUser(session.getUser());
 		em.getTransaction().begin();
 		em.createQuery("delete from Matiere where id=:id").setParameter("id", matiere.getId()).executeUpdate();
 		em.getTransaction().commit();		
