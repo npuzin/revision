@@ -1,18 +1,21 @@
 package com.nico.revision.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="sessions")
-public class Session {
+public class Session implements Serializable {
 
 	private String sessionId;
-	private int userId;
+	private User user;
 	private Timestamp creationDate;
 	
 	
@@ -24,13 +27,14 @@ public class Session {
   	public void setSessionId(String sessionId) {
   		this.sessionId = sessionId;
   	}
-
-	@Column(name="user_id")
-	public int getUserId() {
-		return this.userId;
+	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	public User getUser() {
+		return this.user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	@Column(name="creation_date")

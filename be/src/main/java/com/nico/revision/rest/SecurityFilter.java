@@ -38,6 +38,7 @@ public class SecurityFilter implements Filter {
 	    		SessionService srv = new SessionService();
 	    		Session session = srv.getSession(sessionId);
 	    		 
+	    		req.setAttribute("session", session);
 	        	if (session != null) {	    			        	
 		        	filterChain.doFilter(request, response);
 	    		} else {

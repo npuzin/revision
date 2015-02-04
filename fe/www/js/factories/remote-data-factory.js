@@ -2,12 +2,10 @@ angular.module('revision')
 
 .factory('remoteData', ['uuid2', '$http', 'globalConfig', '$q', function(uuid2, $http, globalConfig, $q) {
 
-  var userId = 1;
-
   var getMatieres = function() {
 
     var dfr = $q.defer();
-    var url = globalConfig.getBackendUrl() + '/rest/matieres?userId=' + userId;
+    var url = globalConfig.getBackendUrl() + '/rest/matieres';
     $http.get(url, {
         headers: {
           'My-Header' : 'value',
@@ -57,7 +55,7 @@ angular.module('revision')
   var getMatiere = function(matiereId) {
 
     var dfr = $q.defer();
-    var url = globalConfig.getBackendUrl() + '/rest/matiere/' + matiereId + '?userId=' + userId;
+    var url = globalConfig.getBackendUrl() + '/rest/matiere/' + matiereId;
     $http.get(url).then(function(response) {
 
       dfr.resolve(response.data);
@@ -117,7 +115,7 @@ angular.module('revision')
   var addMatiere = function(matiere) {
 
     var dfr = $q.defer();
-    var url = globalConfig.getBackendUrl() + '/rest/matiere/add?userId=' + userId;
+    var url = globalConfig.getBackendUrl() + '/rest/matiere/add';
 
     $http.post(url, matiere).then(function(response) {
 
@@ -187,7 +185,7 @@ angular.module('revision')
   var deleteMatiere = function(matiereId) {
 
     var dfr = $q.defer();
-    var url = globalConfig.getBackendUrl() + '/rest/matiere/delete?userId=' + userId;
+    var url = globalConfig.getBackendUrl() + '/rest/matiere/delete';
     var matiere = {
       id: matiereId
     };

@@ -27,20 +27,20 @@ public class EMFactory {
 			} else {
 				
 				// sql server database
-				/*properties.put("javax.persistence.jdbc.driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				properties.put("javax.persistence.jdbc.driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				properties.put("javax.persistence.jdbc.url", "jdbc:sqlserver://localhost:1433;databaseName=revision;integratedSecurity=false;");				
 				properties.put("hibernate.dialect","org.hibernate.dialect.SQLServer2008Dialect");
 				properties.put("hibernate.show_sql","true");
 				properties.put("javax.persistence.jdbc.user","sa");
-				properties.put("javax.persistence.jdbc.password","pass-1234");*/
+				properties.put("javax.persistence.jdbc.password","pass-1234");
 				
 				// google cloud sql database (mysql)
-				properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
+				/*properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
 				properties.put("hibernate.dialect","org.hibernate.dialect.MySQL5InnoDBDialect");
 				properties.put("javax.persistence.jdbc.url","jdbc:mysql://173.194.251.164:3306/revision");				
 				properties.put("hibernate.show_sql","true");
 				properties.put("javax.persistence.jdbc.user","root");
-				properties.put("javax.persistence.jdbc.password","passwordd");
+				properties.put("javax.persistence.jdbc.password","passwordd");*/
 				
 			}
 
