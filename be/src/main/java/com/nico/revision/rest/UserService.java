@@ -1,7 +1,9 @@
 package com.nico.revision.rest;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -51,6 +53,17 @@ public class UserService {
 			Session session = srv.createSession(userInDb.getId());					
 			return session; 
 		}
+		 
+	}
+	
+	@Path("/speed")
+	@GET	
+	@Produces("application/json; charset=UTF-8")
+	public User speed(@Context HttpResponse response) throws Exception {
+		
+		User u = new User();
+		u.setEmail("speed@test.com");
+		return u;
 		 
 	}
 	

@@ -74,7 +74,8 @@ angular.module('revision', ['ionic','angularUUID2','ngCookies'])
     url: '/login',
     templateUrl: 'views/login.html',
     controller: 'LoginCtrl'
-  });
+  })
+  ;
 });
 
 /*.factory('$exceptionHandler', function() {

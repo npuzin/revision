@@ -10,6 +10,14 @@ angular.module('revision')
         $cookieStore.put('Session-Id', session.sessionId);
         $location.path('/matieres');
     });
-  }
+  };
+
+  $scope.speed = function() {
+
+    remoteData.speed().then(function(response) {
+
+        console.log(response.data);
+    });
+  };
 
 }]);

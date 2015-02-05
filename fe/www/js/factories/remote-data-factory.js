@@ -200,7 +200,24 @@ angular.module('revision')
 
     return dfr.promise;
 
-  }
+  };
+
+  var speed = function() {
+
+    var dfr = $q.defer();
+    var url = globalConfig.getBackendUrl() + '/rest/speed';
+
+    $http.get(url).then(function(response) {
+
+      dfr.resolve(response.data);
+    }, function(response) {
+
+      dfr.reject();
+    });
+
+    return dfr.promise;
+
+  };
 
   return {
     getMatieres: getMatieres,
@@ -214,6 +231,7 @@ angular.module('revision')
     addFiche: addFiche,
     getFiche: getFiche,
     saveFiche: saveFiche,
-    login: login
+    login: login,
+    speed: speed
   }
 }]);

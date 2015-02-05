@@ -1,7 +1,6 @@
 package com.nico.revision.rest;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -49,7 +48,7 @@ public class SecurityFilter implements Filter {
     	    	    	
     	HttpServletRequest req = (HttpServletRequest) request;	
 		HttpServletResponse resp = (HttpServletResponse) response;
-		boolean isPublicUrl = req.getPathInfo().equals("/login") ;
+		boolean isPublicUrl = req.getPathInfo().equals("/login") || req.getPathInfo().equals("/speed") ;
 		
 		if (isPublicUrl || authenticate(req, resp)) {
 			filterChain.doFilter(request, response);
