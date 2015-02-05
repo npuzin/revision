@@ -1,14 +1,14 @@
 package com.nico.revision.rest;
 
+import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.EntityManager;
-
 import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import com.nico.revision.dao.SessionDao;
 import com.nico.revision.model.Session;
 import com.nico.revision.model.User;
 
@@ -17,23 +17,21 @@ import com.nico.revision.model.User;
 public class SessionService {
 				
 	
-	public Session createSession(int userId) {
-		
-		EntityManager em = EMFactory.createEntityManager();
-		em.getTransaction().begin();
+	public Session createSession(int userId) throws Exception {
+				
+		Connection conn = ConnectionFactory.getNewConnection();
 		Session session = new Session();
 		session.setCreationDate(new Timestamp(new Date().getTime()));
 		session.setSessionId(UUID.randomUUID().toString());
 		User u = new User();
 		u.setId(userId);
 		session.setUser(u);
-		em.persist(session);
-		em.getTransaction().commit();
-		em.close();
+		SessionDao.insertSession(conn, session);
+		conn.close();
 		return session;
 	}
 	
-	public Session getSession(String sessionId) {
+	public Session getSession(String sessionId) throws Exception {
 		if (sessionId == null || sessionId.length() != 36) {
 			return null;
 		}
@@ -43,12 +41,12 @@ public class SessionService {
 		if (session != null) {
 			return session;
 		} else {
-			EntityManager em = EMFactory.createEntityManager();
-			session = em.find(Session.class, sessionId);
+			Connection conn = ConnectionFactory.getNewConnection();
+			session = SessionDao.getSession(conn, sessionId);
 			if (session != null) {				
 				cache.put(cacheKey, session, Expiration.byDeltaSeconds(300));
 			}
-			em.close();
+			conn.close();
 			return session;
 		}
 	}

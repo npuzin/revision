@@ -1,8 +1,8 @@
 package com.nico.revision.rest;
 
+import java.sql.Connection;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 
+import com.nico.revision.dao.MatiereDao;
 import com.nico.revision.model.Matiere;
 import com.nico.revision.model.Session;
 
@@ -27,12 +28,9 @@ public class MatiereService {
 							
 		Session session = (Session) request.getAttribute("session");
 		
-		EntityManager em = EMFactory.createEntityManager();		
-		List<Matiere> matieres = em.createQuery("FROM Matiere where user=:user", Matiere.class)
-				.setParameter("user", session.getUser())
-				.getResultList();		
-		em.close();
-				
+		Connection conn = ConnectionFactory.getNewConnection();		
+		List<Matiere> matieres = MatiereDao.getMatieres(conn, session.getUser());	
+		conn.close();				
 		return matieres;
 	}
 	
@@ -41,14 +39,13 @@ public class MatiereService {
 	@Produces("application/json; charset=UTF-8")
 	public Matiere getMatiere(@Context HttpServletRequest request, @PathParam("matiereId") Integer matiereId) throws Exception {
 												
-		Session session = (Session) request.getAttribute("session");
-		
-		EntityManager em = EMFactory.createEntityManager();		
-		Matiere matiere = em.createQuery("FROM Matiere where user=:user and id=:id", Matiere.class)
-				.setParameter("user", session.getUser())
-				.setParameter("id", matiereId)
-				.getSingleResult();		
-		em.close();
+		Session session = (Session) request.getAttribute("session");		
+		Connection conn = ConnectionFactory.getNewConnection();
+		Matiere matiere = new Matiere();
+		matiere.setId(matiereId);
+		matiere.setUser(session.getUser());
+		matiere = MatiereDao.getMatiereById(conn, matiere);		
+		conn.close(); 
 				
 		return matiere;
 	}
@@ -58,12 +55,12 @@ public class MatiereService {
 	@Produces("application/json; charset=UTF-8")
 	public List<Matiere> updateMatiere(@Context HttpServletRequest request, Matiere matiere) throws Exception {
 												
+		Session session = (Session) request.getAttribute("session");
 		
-		EntityManager em = EMFactory.createEntityManager();	
-		em.getTransaction().begin();
-		em.merge(matiere);
-		em.getTransaction().commit();
-		em.close();
+		Connection conn = ConnectionFactory.getNewConnection();		
+		matiere.setUser(session.getUser());
+		MatiereDao.updateMatiere(conn, matiere);	 	
+		conn.close();
 				
 		return getMatieres(request);
 	}
@@ -76,12 +73,10 @@ public class MatiereService {
 											
 		Session session = (Session) request.getAttribute("session");
 		
-		EntityManager em = EMFactory.createEntityManager();				
+		Connection conn = ConnectionFactory.getNewConnection();		
 		matiere.setUser(session.getUser());
-		em.getTransaction().begin();
-		em.persist(matiere);
-		em.getTransaction().commit();		
-		em.close();
+		MatiereDao.insertMatiere(conn, matiere);		
+		conn.close();
 				
 		return this.getMatieres(request);
 	}
@@ -95,12 +90,10 @@ public class MatiereService {
 									
 		Session session = (Session) request.getAttribute("session");
 		
-		EntityManager em = EMFactory.createEntityManager();				
+		Connection conn = ConnectionFactory.getNewConnection();		
 		matiere.setUser(session.getUser());
-		em.getTransaction().begin();
-		em.createQuery("delete from Matiere where id=:id").setParameter("id", matiere.getId()).executeUpdate();
-		em.getTransaction().commit();		
-		em.close();
+		MatiereDao.deleteMatiere(conn, matiere);		
+		conn.close();
 				
 		return this.getMatieres(request);
 	}	

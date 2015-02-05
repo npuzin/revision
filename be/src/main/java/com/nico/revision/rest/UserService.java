@@ -1,8 +1,8 @@
 package com.nico.revision.rest;
 
+import java.sql.Connection;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,6 +12,7 @@ import javax.ws.rs.core.Context;
 
 import org.jboss.resteasy.spi.HttpResponse;
 
+import com.nico.revision.dao.UserDao;
 import com.nico.revision.model.Session;
 import com.nico.revision.model.User;
 
@@ -26,9 +27,9 @@ public class UserService {
 	@Produces("application/json; charset=UTF-8")
 	public List<User> getUsers() throws Exception {
 												
-		EntityManager em = EMFactory.createEntityManager();	
-		List<User> users = em.createQuery("FROM User", User.class).getResultList();		
-		em.close();
+		Connection conn = ConnectionFactory.getNewConnection();	
+		List<User> users = UserDao.getUsers(conn);	
+		conn.close();
 				
 		return users; 
 	}
@@ -39,9 +40,9 @@ public class UserService {
 	@Produces("application/json; charset=UTF-8")
 	public Session login(@Context HttpResponse response, User user) throws Exception {
 		
-		EntityManager em = EMFactory.createEntityManager();	
-		User userInDb = em.createQuery("from User where email=:email", User.class).setParameter("email", user.getEmail()).getSingleResult();
-		em.close();
+		Connection conn = ConnectionFactory.getNewConnection();	
+		User userInDb = UserDao.getUserByEmail(conn, user);		
+		conn.close();
 		if (userInDb == null) {
 			return null;
 		} else {

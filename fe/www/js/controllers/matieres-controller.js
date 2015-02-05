@@ -83,9 +83,9 @@ angular.module('revision')
 
   $scope.deleteMatiere = function() {
 
-    remoteData.getFiches($scope.matiereDialogData.matiere.id).then(function(fiches) {
+    remoteData.getFiches($scope.matiereDialogData.matiere.id).then(function(matiere) {
 
-      if (fiches.length > 0) {
+      if (matiere.fiches.length > 0) {
 
         $scope.closeMatiereDialog();
         var myPopup = $ionicPopup.show({

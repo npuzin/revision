@@ -1,40 +1,28 @@
 package com.nico.revision.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.util.List;
 
-@Entity
-@Table(name="matieres")
 public class Matiere {
 
 	private int id;
 	private String name;	
 	private User user;
 	private String color;
+	private List<Fiche> fiches;
 
 	public Matiere(){
 		
 	}
-	
 	public Matiere(int id) {
 		this.id = id;
 	}
-  	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	public int getId() {
 		return id;
 	}
   	public void setId(int id) {
   		this.id = id;
   	}
-
-	@Column(name="name")
 	public String getName() {
 		return name;
 	}
@@ -42,8 +30,6 @@ public class Matiere {
 		this.name = name;
 	}
 	
-	@OneToOne
-	@JoinColumn(name="user_id")
 	public User getUser() {
 		return this.user;
 	}
@@ -51,13 +37,19 @@ public class Matiere {
 		this.user = user;
 	}
 	
-	@Column(name="color")
 	public String getColor() {
 		return color;
 	}
 	public void setColor(String color) {
 		this.color = color;
 	}
+	public List<Fiche> getFiches() {
 	
+		return this.fiches;
+	}
+	public void setFiches(List<Fiche> fiches) {
+		
+		this.fiches = fiches;
+	}
 	
 }

@@ -98,7 +98,7 @@ angular.module('revision')
   $scope.cancel = function() {
 
     if ($scope.fiche.content === '' || $scope.fiche.content === null) {
-      $location.path('/matiere/' + $scope.matiere.id);
+      $location.path('/matiere/' + $scope.fiche.matiere.id);
     } else {
       $scope.loadData();
       $scope.setHeaderButtonsReadOnly($scope.fiche.content !== '');

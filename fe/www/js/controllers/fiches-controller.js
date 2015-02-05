@@ -6,20 +6,13 @@ angular.module('revision')
 
   $scope.loadData = function() {
 
-    remoteData.getMatiere(parseInt($stateParams.matiereId)).then(function (matiere) {
-
-      $scope.matiere = matiere;
-
-      $('ion-header-bar div.title').text(matiere.name);
 
       //$scope.fiches = data.getFiches($scope.matiere.id);
-      remoteData.getFiches($scope.matiere.id).then(function (fiches) {
-        $scope.fiches = fiches;
+      remoteData.getFiches($stateParams.matiereId).then(function (matiere) {
+        $scope.matiere = matiere;
+        $('ion-header-bar div.title').text(matiere.name);
       });
 
-    }, function () {
-      $location.path("/");
-    });
 
   };
 
@@ -82,8 +75,8 @@ angular.module('revision')
         $location.path('/fiche/' + fiche.guid);
       });
     } else {
-      remoteData.updateFiche($scope.ficheDialogData.fiche).then(function(fiches) {
-        $scope.fiches = fiches;
+      remoteData.updateFiche($scope.ficheDialogData.fiche).then(function(matiere) {
+        $scope.matiere = matiere;
         $scope.closeFicheDialog();
       });
     }
@@ -92,8 +85,8 @@ angular.module('revision')
 
   $scope.deleteFiche = function() {
 
-    remoteData.deleteFiche($scope.ficheDialogData.fiche).then(function(fiches) {
-      $scope.fiches = fiches;
+    remoteData.deleteFiche($scope.ficheDialogData.fiche).then(function(matiere) {
+      $scope.matiere = matiere;
       $scope.closeFicheDialog();
     })
 
