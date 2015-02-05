@@ -2,9 +2,18 @@
 
 
   <ion-content>
-  <div style="padding:20px">
-    <button class="button button-calm" ng-click="login()">login</button>
-    <button class="button button-calm" ng-click="speed()">speed</button>
+  <div style="padding:20px;max-width:400px;">
+
+  <div class="list list-inset">
+    <label class="item item-input">
+      <input type="text" ng-model="user.email" placeholder="Email">
+    </label>
+    <label class="item item-input">
+      <input type="text" ng-model="password" placeholder="Mot de passe">
+    </label>
+  </div>
+    <button class="button button-block button-positive" ng-click="login()">login</button>
+    <button class="button button-block button-positive" ng-click="speed()">speed</button>
   </div>
   </ion-content>
 </ion-view>

@@ -65,7 +65,7 @@ public class FicheDao {
 	public static void deleteFiche(Connection conn, Fiche fiche) throws Exception {
 		Fiche f = getFicheByGuid(conn, fiche);
 			
-		PreparedStatement query = conn.prepareStatement("delete fiches where guid=?");		
+		PreparedStatement query = conn.prepareStatement("delete from fiches where guid=?");		
 		query.setString(1, f.getGuid());
 		query.executeUpdate();
 	}

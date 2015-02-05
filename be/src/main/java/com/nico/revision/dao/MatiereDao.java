@@ -47,7 +47,7 @@ public class MatiereDao {
 	
 	public static void deleteMatiere(Connection conn, Matiere matiere) throws Exception {
 		 
-		PreparedStatement query = conn.prepareStatement("delete matieres where id=? and user_id=?");		
+		PreparedStatement query = conn.prepareStatement("delete from matieres where id=? and user_id=?");		
 		query.setInt(1, matiere.getId());
 		query.setInt(2, matiere.getUser().getId());
 		
