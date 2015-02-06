@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('revision')
 
 .controller('FichesCtrl', ['$scope', 'data', '$ionicModal', '$stateParams', '$location', 'remoteData',
@@ -19,7 +21,7 @@ angular.module('revision')
   $scope.loadData();
 
   $scope.back = function() {
-    $location.path("/");
+    $location.path('/');
   };
 
   $scope.ficheDialogData = {};
@@ -32,7 +34,7 @@ angular.module('revision')
     }).then(function(modal) {
       $scope.modal = modal;
     });
-  }
+  };
   $scope.initFicheDialog();
 
   $scope.openFicheDialog = function($event,fiche) {
@@ -88,7 +90,7 @@ angular.module('revision')
     remoteData.deleteFiche($scope.ficheDialogData.fiche).then(function(matiere) {
       $scope.matiere = matiere;
       $scope.closeFicheDialog();
-    })
+    });
 
   };
 

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('revision')
 
 .controller('LoginCtrl', ['$scope','remoteData', '$cookieStore', '$location', function($scope, remoteData,$cookieStore, $location){

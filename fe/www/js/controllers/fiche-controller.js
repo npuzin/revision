@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('revision')
 
 .controller('FicheCtrl', ['$scope', 'data', '$ionicModal', '$stateParams', '$location', '$timeout', 'remoteData',
@@ -7,7 +9,7 @@ angular.module('revision')
 
   $scope.isReadOnly = function() {
     return $('#btnModify').is(':visible');
-  }
+  };
 
   $scope.setHeaderButtonsReadOnly = function(newValue) {
 
@@ -45,7 +47,7 @@ angular.module('revision')
       $scope.editor.destroy();
     }
 
-    var diff = readOnly ? 40 : 100;
+
     $scope.editor = CKEDITOR.replace('editor1', {
       language: 'fr',
       height: $(window).height()-readOnly,
@@ -67,16 +69,12 @@ angular.module('revision')
       init();
 
     }, function() {
-      $location.path("/");
+      $location.path('/');
     });
 
   };
 
   $scope.loadData();
-
-  $scope.$on("$destroy", function() {
-    //$scope.editor.destroy();
-  });
 
 
   $scope.modifierFiche = function() {
@@ -88,7 +86,7 @@ angular.module('revision')
   $scope.saveFiche = function() {
 
     $scope.fiche.content = $scope.editor.getData();
-    remoteData.saveFiche($scope.fiche).then(function(fiche){
+    remoteData.saveFiche($scope.fiche).then(function(){
       $scope.setHeaderButtonsReadOnly(true);
       $scope.initCKEditor(true);
     });
@@ -105,7 +103,7 @@ angular.module('revision')
       $scope.initCKEditor(($scope.fiche.content !== ''));
     }
 
-  }
+  };
 
   $scope.back = function() {
 

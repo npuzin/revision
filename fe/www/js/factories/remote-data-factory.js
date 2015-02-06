@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('revision')
 
 .factory('remoteData', ['uuid2', '$http', 'globalConfig', '$q', function(uuid2, $http, globalConfig, $q) {
@@ -6,15 +8,10 @@ angular.module('revision')
 
     var dfr = $q.defer();
     var url = globalConfig.getBackendUrl() + '/rest/matieres';
-    $http.get(url, {
-        headers: {
-          'My-Header' : 'value',
-          'My-Header2' : 'value2'
-        }
-      }).then(function(response) {
+    $http.get(url).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject([]);
     });
@@ -29,7 +26,7 @@ angular.module('revision')
     $http.post(url, fiche).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject([]);
     });
@@ -44,7 +41,7 @@ angular.module('revision')
     $http.post(url, matiere).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject([]);
     });
@@ -59,7 +56,7 @@ angular.module('revision')
     $http.get(url).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject([]);
     });
@@ -74,7 +71,7 @@ angular.module('revision')
     $http.get(url).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject([]);
     });
@@ -89,7 +86,7 @@ angular.module('revision')
     $http.post(url,fiche).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject([]);
     });
@@ -104,7 +101,7 @@ angular.module('revision')
     $http.post(url,fiche).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject([]);
     });
@@ -120,7 +117,7 @@ angular.module('revision')
     $http.post(url, matiere).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject([]);
     });
@@ -137,7 +134,7 @@ angular.module('revision')
     $http.get(url).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject();
     });
@@ -154,7 +151,7 @@ angular.module('revision')
     $http.post(url, fiche).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject();
     });
@@ -174,7 +171,7 @@ angular.module('revision')
     $http.post(url, user).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject();
     });
@@ -193,7 +190,7 @@ angular.module('revision')
     $http.post(url, matiere).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject([]);
     });
@@ -210,7 +207,7 @@ angular.module('revision')
     $http.get(url).then(function(response) {
 
       dfr.resolve(response.data);
-    }, function(response) {
+    }, function() {
 
       dfr.reject();
     });
@@ -233,5 +230,5 @@ angular.module('revision')
     saveFiche: saveFiche,
     login: login,
     speed: speed
-  }
+  };
 }]);

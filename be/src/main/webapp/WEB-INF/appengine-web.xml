@@ -8,6 +8,8 @@
 	
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
-    </system-properties>
+        <property name="local.database.type" value="sqlserver"/> <!-- mysql or sqlserver -->
+    </system-properties>    
+	    
 
 </appengine-web-app>

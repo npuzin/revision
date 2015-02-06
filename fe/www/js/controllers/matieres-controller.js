@@ -1,7 +1,9 @@
+'use strict';
+
 angular.module('revision')
 
-.controller('MatieresCtrl', ['$scope', 'data', '$ionicModal', '$ionicPopup', '$http', 'remoteData', '$cookieStore',
-  function($scope,data, $ionicModal, $ionicPopup, $http, remoteData, $cookieStore){
+.controller('MatieresCtrl', ['$scope', 'data', '$ionicModal', '$ionicPopup', '$http', 'remoteData',
+  function($scope,data, $ionicModal, $ionicPopup, $http, remoteData){
 
 
 
@@ -88,7 +90,7 @@ angular.module('revision')
       if (matiere.fiches.length > 0) {
 
         $scope.closeMatiereDialog();
-        var myPopup = $ionicPopup.show({
+        $ionicPopup.show({
           template: 'La matière ne peut être effacée car elle contient des fiches',
           title: 'Information',
           buttons: [

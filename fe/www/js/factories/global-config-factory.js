@@ -1,8 +1,9 @@
+'use strict';
+
 angular.module('revision')
 
 .factory('globalConfig', function($location) {
 
-  var LOCAL_BACKEND_URL = 'http://localhost:8080';
   var PROD_BACKEND_URL = 'http://npurevision.appspot.com';
 
   var getBackendUrl = function() {
@@ -10,7 +11,7 @@ angular.module('revision')
     var host = $location.host();
     var port = $location.port();
     if (host === 'localhost' && port === 8100) {
-      return LOCAL_BACKEND_URL;
+      return '';
     } else {
       return PROD_BACKEND_URL;
     }
@@ -33,5 +34,5 @@ angular.module('revision')
     isProd: isProd,
     isDev: isDev
 
-  }
+  };
 });

@@ -9,6 +9,7 @@ import com.google.appengine.api.utils.SystemProperty;
 public class ConnectionFactory {
 
 	public static Connection getNewConnection() throws Exception {
+				
 		
 		String url; 
 		Properties properties = new Properties(); 
@@ -18,12 +19,21 @@ public class ConnectionFactory {
 			properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.GoogleDriver");
 			url = "jdbc:google:mysql://npurevision:test2/revision?user=root";
 		} else {
-			//Class.forName("com.mysql.jdbc.GoogleDriver");
-			//properties.put("javax.persistence.jdbc.driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			//url = "jdbc:sqlserver://localhost:1433;databaseName=revision;integratedSecurity=false;user=sa;password=pass-1234";
-			Class.forName("com.mysql.jdbc.Driver");
-			properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");			
-			url = "jdbc:mysql://173.194.251.164:3306/revision?user=root&password=passwordd";			
+		
+			Properties sysProperties = System.getProperties(); 
+			String localDatabaseType = sysProperties.getProperty("local.database.type");
+			if (localDatabaseType.equals("mysql")) {
+			
+				Class.forName("com.mysql.jdbc.Driver");
+				properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");			
+				url = "jdbc:mysql://173.194.251.164:3306/revision?user=root&password=passwordd";
+						
+			} else {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				properties.put("javax.persistence.jdbc.driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				url = "jdbc:sqlserver://localhost:1433;databaseName=revision;integratedSecurity=false;user=sa;password=pass-1234";
+			}
+								
 		}
 		
 		Connection conn = DriverManager.getConnection(url,properties);

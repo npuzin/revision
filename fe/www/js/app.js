@@ -1,9 +1,8 @@
+'use strict';
 
 angular.module('revision', ['ionic','angularUUID2','ngCookies'])
 
 .run(function($ionicPlatform) {
-
-
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -12,7 +11,7 @@ angular.module('revision', ['ionic','angularUUID2','ngCookies'])
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
     if(window.StatusBar) {
-      StatusBar.styleDefault();
+      window.StatusBar.styleDefault();
     }
   });
 })
@@ -44,9 +43,9 @@ angular.module('revision', ['ionic','angularUUID2','ngCookies'])
 
   $httpProvider.interceptors.push('myHttpInterceptor');
 
-  window.onerror = function(errorMsg, url, lineNumber) {
+  /*window.onerror = function(errorMsg, url, lineNumber) {
     //alert(errorMsg + '\n\nFile ' + url + ' line ' +lineNumber);
-  }
+  };*/
 
   $urlRouterProvider.otherwise('/');
 

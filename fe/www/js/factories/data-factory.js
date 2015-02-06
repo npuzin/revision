@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('revision')
 
 .factory('data', function(uuid2) {
@@ -7,31 +9,16 @@ angular.module('revision')
     var id=0;
     items.forEach(function (current) {
 
-      if (current.id > id)
+      if (current.id > id) {
         id=current.id;
+      }
     });
     return id;
   };
-  var initLocalStorage = function() {
 
-    if (!windowlocalStorage['matieres']) {
-      var matieres = [];
-      // matieres.push({name:'Histoire',id:1, color:'yellow'});
-      // matieres.push({name:'Géographie',id:2, color:'green'});
-      // matieres.push({name:'Mathématiques',id:3, color:'blue'});
-      windowlocalStorage['matieres'] = JSON.stringify(matieres);
-    }
-
-    // if (!windowlocalStorage['fiches_1']) {
-    //   var fiches = [];
-    //   fiches.push({name:'Test fiche histoire',id:1, guid: uuid2.newguid()});
-    //   windowlocalStorage['fiches_1'] = JSON.stringify(fiches);
-    // }
-  };
-  //initLocalStorage();
   var getMatieres = function() {
 
-    return JSON.parse(windowlocalStorage['matieres']);
+    return JSON.parse(windowlocalStorage.matieres);
   };
   var getFiches = function(matiereId) {
 
@@ -46,7 +33,7 @@ angular.module('revision')
     var max = getMaxId(matieres);
     matiere.id = max+1;
     matieres.push(matiere);
-    windowlocalStorage['matieres'] = JSON.stringify(matieres);
+    windowlocalStorage.matieres = JSON.stringify(matieres);
     return matieres;
   };
   var updateMatiere = function(matiere) {
@@ -57,7 +44,7 @@ angular.module('revision')
     });
     currentMatiere.name = matiere.name;
     currentMatiere.color = matiere.color;
-    windowlocalStorage['matieres'] = JSON.stringify(matieres);
+    windowlocalStorage.matieres = JSON.stringify(matieres);
     return matieres;
   };
   var deleteMatiere = function(matiereId) {
@@ -70,7 +57,7 @@ angular.module('revision')
     if (pos>=0) {
       matieres.splice(pos,1);
     }
-    windowlocalStorage['matieres'] = JSON.stringify(matieres);
+    windowlocalStorage.matieres = JSON.stringify(matieres);
     return matieres;
   };
   var addFiche = function(matiereId, fiche) {
@@ -127,12 +114,12 @@ angular.module('revision')
 
     var guid = fiche.guid;
     return windowlocalStorage['fiche_'+guid];
-  }
+  };
   var saveFicheContent = function(fiche, content) {
 
     var guid = fiche.guid;
     windowlocalStorage['fiche_'+guid] = content;
-  }
+  };
   return {
     getMatieres: getMatieres,
     addMatiere: addMatiere,
@@ -146,5 +133,5 @@ angular.module('revision')
     deleteFiche: deleteFiche,
     getFicheContent: getFicheContent,
     saveFicheContent: saveFicheContent
-  }
+  };
 });
