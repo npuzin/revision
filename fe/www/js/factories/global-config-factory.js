@@ -12,6 +12,8 @@ angular.module('revision')
     var port = $location.port();
     if (host === 'localhost' && (port === 8100 || port === 8080)) {
       return '';
+    } else if (host === 'npurevision.appspot.com') {
+      return '';
     } else {
       return PROD_BACKEND_URL;
     }

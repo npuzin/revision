@@ -126,6 +126,8 @@
 				<version>1.9.10</version>
 				<configuration>
 					<enableJarClasses>false</enableJarClasses>
+					<proxyHost>proxy.iruworld.org:8080</proxyHost>
+                    <proxyHttps>proxy.iruworld.org:8080</proxyHttps>
 					<disableUpdateCheck>true</disableUpdateCheck>
 					<!-- Comment in the below snippet to bind to all IPs instead of just 
 						localhost -->

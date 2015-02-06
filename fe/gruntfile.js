@@ -38,7 +38,6 @@ module.exports = function(grunt) {
 
       main: {
         files: {
-          'www/css/ionic.css': 'scss/ionic.app.scss',
           'www/css/main.css': 'scss/main.scss'
         }
       }
