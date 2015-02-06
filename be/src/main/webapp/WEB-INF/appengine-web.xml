@@ -8,7 +8,7 @@
 	
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
-        <property name="local.database.type" value="sqlserver"/> <!-- mysql or sqlserver -->
+        <property name="local.database.type" value="mysql"/> <!-- mysql or sqlserver -->
     </system-properties>    
 	    
 

@@ -51,28 +51,45 @@ angular.module('revision', ['ionic','angularUUID2','ngCookies'])
 
   $stateProvider
 
+
   .state('home', {
     url: '/',
-    templateUrl: 'views/matieres.html',
-    controller: 'MatieresCtrl'
+    views: {
+      'menuContent': {
+        templateUrl: 'views/matieres.html',
+        controller: 'MatieresCtrl'
+      }
+    }
   })
 
   .state('fiches', {
     url: '/matiere/:matiereId',
-    templateUrl: 'views/fiches.html',
-    controller: 'FichesCtrl'
+    views: {
+      'menuContent': {
+        templateUrl: 'views/fiches.html',
+        controller: 'FichesCtrl'
+      }
+    }
   })
 
   .state('fiche', {
     url: '/fiche/:guid',
-    templateUrl: 'views/fiche.html',
-    controller: 'FicheCtrl'
+    views: {
+      'menuContent': {
+        templateUrl: 'views/fiche.html',
+        controller: 'FicheCtrl'
+      }
+    }
   })
 
   .state('login', {
     url: '/login',
-    templateUrl: 'views/login.html',
-    controller: 'LoginCtrl'
+    views: {
+      'menuContent': {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      }
+    }
   })
   ;
 });

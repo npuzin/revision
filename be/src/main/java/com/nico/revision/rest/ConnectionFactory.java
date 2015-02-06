@@ -26,7 +26,7 @@ public class ConnectionFactory {
 			
 				Class.forName("com.mysql.jdbc.Driver");
 				properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");			
-				url = "jdbc:mysql://173.194.251.164:3306/revision?user=root&password=passwordd";
+				url = "jdbc:mysql://localhost:3306/revision?user=root&password=pass-1234";
 						
 			} else {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
