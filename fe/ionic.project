@@ -1,4 +1,10 @@
 {
   "name": "revision",
-  "app_id": "960c84cd"
+  "app_id": "960c84cd",
+  "proxies": [
+    {
+      "path": "/rest",
+      "proxyUrl": "http://localhost:8080/rest"
+    }
+  ]
 }
