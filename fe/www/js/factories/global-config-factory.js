@@ -10,7 +10,7 @@ angular.module('revision')
 
     var host = $location.host();
     var port = $location.port();
-    if (host === 'localhost' && port === 8100) {
+    if (host === 'localhost' && (port === 8100 || port === 8080)) {
       return '';
     } else {
       return PROD_BACKEND_URL;

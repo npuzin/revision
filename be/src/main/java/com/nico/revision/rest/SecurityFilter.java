@@ -47,8 +47,19 @@ public class SecurityFilter implements Filter {
     throws IOException, ServletException {
     	    	    	
     	HttpServletRequest req = (HttpServletRequest) request;	
+    	
 		HttpServletResponse resp = (HttpServletResponse) response;
-		boolean isPublicUrl = req.getPathInfo().equals("/login") || req.getPathInfo().equals("/speed") ;
+		boolean isPublicUrl;
+		if (req.getRequestURI().startsWith("/rest")) {
+			if (req.getRequestURI().equals("/rest/login") || req.getRequestURI().equals("/rest/speed")) {
+				isPublicUrl = true;
+			} else {
+				isPublicUrl = false;
+			}
+			
+		} else {
+			isPublicUrl = true;
+		}
 		
 		if (isPublicUrl || authenticate(req, resp)) {
 			filterChain.doFilter(request, response);
